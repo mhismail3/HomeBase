@@ -18,7 +18,8 @@ html, body {
 }
 
 body {
-  font-family: ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  /* Switch to a classic serif stack for a distinct feel */
+  font-family: ui-serif, Georgia, "Iowan Old Style", Palatino, "Times New Roman", Times, serif;
   line-height: 1.6;
   font-size: clamp(16px, 1.8vw, 18px);
 }
@@ -44,11 +45,22 @@ body::before {
   pointer-events: none;
 }
 
+.main { animation: fade-in-up 300ms ease-out both; }
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .site-header {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: baseline;
   border-bottom: 1px solid var(--rule);
+  position: sticky;
+  top: 0;
+  backdrop-filter: saturate(120%) blur(6px);
+  background: color-mix(in srgb, var(--bg) 92%, white 8%);
 }
 
 .brand-link {
@@ -67,8 +79,8 @@ h1 { font-size: clamp(1.6rem, 5vw, 2.25rem); margin: 0.5rem 0 1rem; }
 h2 { font-size: clamp(1.25rem, 3.2vw, 1.6rem); }
 
 .post-list { list-style: none; padding: 0; margin: 0; }
-.post-list li { margin: clamp(18px, 3.2vw, 28px) 0; padding-left: 0.25rem; border-left: 2px solid transparent; }
-.post-list li:hover { border-left-color: var(--rule); }
+.post-list li { margin: clamp(18px, 3.2vw, 28px) 0; padding-left: 0.25rem; border-left: 2px solid transparent; transition: border-color .2s ease, transform .2s ease; }
+.post-list li:hover { border-left-color: var(--rule); transform: translateX(2px); }
 .post-title { font-weight: 700; }
 
 .sr-only { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }

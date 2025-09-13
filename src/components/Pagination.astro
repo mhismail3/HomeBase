@@ -1,0 +1,18 @@
+---
+const { page, base } = Astro.props as { page: { current: number, last: number }, base: string };
+---
+{page.last > 1 && (
+  <nav class="pagination" aria-label="Pagination">
+    {page.current > 1 && (
+      <a href={`${base}${page.current === 2 ? '' : `page/${page.current - 1}/`}`}>← newer</a>
+    )}
+    {page.current < page.last && (
+      <a style="float:right" href={`${base}page/${page.current + 1}/`}>older →</a>
+    )}
+  </nav>
+)}
+
+<style>
+.pagination { margin-top: 1.25rem; }
+</style>
+

@@ -3,6 +3,7 @@ export async function GET({ site }) {
   const pages = [
     '',
     'about/',
+    'tags/',
     'feed.xml'
   ];
   const body = `<?xml version="1.0" encoding="UTF-8"?>\n` +
