@@ -1,7 +1,8 @@
 ---
 import '../styles/base.css';
 const { title = 'Home Base', description = 'A minimal, content-first hub' } = Astro.props;
-const base = Astro.site ? new URL('.', Astro.site).pathname : '/';
+// Use Astro/Vite base for GitHub Pages subpath. In dev this will be '/'.
+const base: string = import.meta.env.BASE_URL || '/';
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -10,25 +11,23 @@ const base = Astro.site ? new URL('.', Astro.site).pathname : '/';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title}</title>
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
   </head>
   <body>
     <a class="sr-only" href="#content">Skip to content</a>
-    <header class="container">
-      <div>
-        <strong>boz.</strong>
+    <header class="site-header container">
+      <div class="brand">
+        <a class="brand-link" href={base}>mohsin ismail</a>
       </div>
-      <nav aria-label="Primary">
+      <nav class="site-nav" aria-label="Primary">
         <a href={base}>index</a>
         <a href={`${base}about/`}>about</a>
-        <span aria-disabled="true" tabindex="-1">search</span>
       </nav>
     </header>
-    <main id="content" class="container">
+    <main id="content" class="container main">
       <slot />
     </main>
-    <footer class="container">
-      <small>&copy; {new Date().getFullYear()} — Home Base</small>
+    <footer class="container site-footer">
+      <small>&copy; {new Date().getFullYear()} — mohsin ismail</small>
     </footer>
   </body>
   </html>

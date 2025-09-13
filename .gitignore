@@ -4,3 +4,9 @@ dist/
 .DS_Store
 .env
 coverage/
+/.idea/
+/.vscode/
+npm-debug.log*
+yarn-error.log
+pnpm-lock.yaml
+*.local

@@ -17,7 +17,7 @@ describe('site build and quality', () => {
     const file = join(dist, 'index.html');
     expect(existsSync(file)).toBe(true);
     const html = readFileSync(file, 'utf8');
-    expect(html).toContain('Posts');
+    expect(html).toMatch(/mohsin ismail/i);
     expect(html).toMatch(/\/(HomeBase\/)?posts\/2025-01-01-welcome\//);
   });
 
@@ -45,4 +45,3 @@ describe('site build and quality', () => {
     expect(issues).toEqual([]);
   });
 });
-

@@ -3,10 +3,10 @@ import Base from '../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 const posts = (await getCollection('posts', ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-const base = Astro.site ? new URL('.', Astro.site).pathname : '/';
+const base: string = import.meta.env.BASE_URL || '/';
 ---
 <Base title="Home Base">
-  <h1>Posts</h1>
+  <h1>mohsin ismail</h1>
   <ul class="post-list">
     {posts.map((post) => (
       <li>

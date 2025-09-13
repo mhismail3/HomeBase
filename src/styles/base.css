@@ -1,9 +1,10 @@
 :root {
-  --bg: #ffffff;
+  --bg: #fcfcfc;
   --fg: #0b0b0b;
-  --muted: #5c6b73;
-  --accent: #0a66c2;
-  --max-ch: 75ch;
+  --muted: #5f6a71;
+  --accent: #1d6ef2;
+  --rule: #e7eefc;
+  --max-ch: 72ch;
 }
 
 html { box-sizing: border-box; }
@@ -22,7 +23,7 @@ body {
   font-size: clamp(16px, 1.8vw, 18px);
 }
 
-a { color: var(--accent); text-decoration-thickness: 1px; }
+a { color: var(--accent); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
 a:hover { text-decoration-thickness: 2px; }
 
 .container {
@@ -33,7 +34,31 @@ a:hover { text-decoration-thickness: 2px; }
 
 header, footer { color: var(--muted); }
 
-header nav a { display: inline-block; margin-right: 12px; }
+/* Unique sauce: subtle ruled page feel with a top border and left guide */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--rule), transparent 60%);
+  pointer-events: none;
+}
+
+.site-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+}
+
+.brand-link {
+  text-decoration: none;
+  color: var(--fg);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.site-nav a { display: inline-block; margin-left: 14px; }
 
 main { margin-top: 1rem; }
 
@@ -42,12 +67,13 @@ h1 { font-size: clamp(1.6rem, 5vw, 2.25rem); margin: 0.5rem 0 1rem; }
 h2 { font-size: clamp(1.25rem, 3.2vw, 1.6rem); }
 
 .post-list { list-style: none; padding: 0; margin: 0; }
-.post-list li { margin: clamp(14px, 3.2vw, 24px) 0; }
+.post-list li { margin: clamp(18px, 3.2vw, 28px) 0; padding-left: 0.25rem; border-left: 2px solid transparent; }
+.post-list li:hover { border-left-color: var(--rule); }
 .post-title { font-weight: 700; }
 
 .sr-only { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 
 @media (min-width: 48rem) {
   body { font-size: clamp(17px, 1.2vw, 19px); }
+  .container { padding-left: clamp(24px, 3vw, 40px); padding-right: clamp(24px, 3vw, 40px); }
 }
-
