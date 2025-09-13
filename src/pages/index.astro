@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const base = Astro.site ? new URL('.', Astro.site).pathname : '/';
+---
+<Base title="Home Base">
+  <h1>Posts</h1>
+  <ul class="post-list">
+    {posts.map((post) => (
+      <li>
+        <a class="post-title" href={`${base}posts/${post.slug}/`}>{post.data.title}</a>
+      </li>
+    ))}
+  </ul>
+</Base>

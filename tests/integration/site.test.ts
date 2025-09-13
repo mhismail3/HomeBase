@@ -1,0 +1,48 @@
+import { describe, it, expect, beforeAll } from 'vitest';
+import { execSync } from 'node:child_process';
+import { readFileSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { checkLinks, checkA11yLite } from '../../scripts/quality';
+
+const root = process.cwd();
+const dist = join(root, 'dist');
+
+describe('site build and quality', () => {
+  beforeAll(() => {
+    execSync('rm -rf dist', { stdio: 'inherit' });
+    execSync('npm run --silent build', { stdio: 'inherit' });
+  }, 180000);
+
+  it('produces an index.html with base-aware post links', () => {
+    const file = join(dist, 'index.html');
+    expect(existsSync(file)).toBe(true);
+    const html = readFileSync(file, 'utf8');
+    expect(html).toContain('Posts');
+    expect(html).toMatch(/\/(HomeBase\/)?posts\/2025-01-01-welcome\//);
+  });
+
+  it('renders the welcome post page', () => {
+    const file = join(dist, 'posts', '2025-01-01-welcome', 'index.html');
+    expect(existsSync(file)).toBe(true);
+    const html = readFileSync(file, 'utf8');
+    expect(html).toContain('Welcome');
+  });
+
+  it('generates a feed', () => {
+    const feed = join(dist, 'feed.xml');
+    expect(existsSync(feed)).toBe(true);
+    const xml = readFileSync(feed, 'utf8');
+    expect(xml).toMatch(/<rss|<feed/);
+  });
+
+  it('has no broken internal links', () => {
+    const issues = checkLinks(dist);
+    expect(issues).toEqual([]);
+  });
+
+  it('passes lite a11y checks', () => {
+    const issues = checkA11yLite(dist);
+    expect(issues).toEqual([]);
+  });
+});
+
