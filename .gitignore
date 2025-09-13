@@ -10,3 +10,14 @@ npm-debug.log*
 yarn-error.log
 pnpm-lock.yaml
 *.local
+tmp/
+temp/
+.cache/
+playwright-report/
+test-results/
+reports/
+*.log
+*.tmp
+.env.*.local
+Thumbs.db
+Icon?
