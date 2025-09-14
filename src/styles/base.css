@@ -57,8 +57,14 @@ body::before {
   top: 0;
   z-index: 10;
   border-bottom: 1px solid var(--rule);
+  /* Fallback for browsers that don't support color-mix */
+  background-color: var(--bg);
+  /* Backdrop support across browsers, including iOS Safari */
+  -webkit-backdrop-filter: saturate(120%) blur(6px);
   backdrop-filter: saturate(120%) blur(6px);
-  background: color-mix(in srgb, var(--bg) 92%, white 8%);
+}
+@supports (background: color-mix(in srgb, white 90%, black 10%)) {
+  .site-header { background: color-mix(in srgb, var(--bg) 92%, white 8%); }
 }
 .header-inner {
   display: grid;
