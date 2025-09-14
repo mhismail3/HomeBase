@@ -129,20 +129,39 @@ h2 { font-size: clamp(1.25rem, 3.2vw, 1.6rem); }
 .post-card.is-hidden { display: none; }
 
 .post-head { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: .25rem .75rem; }
-.post-title { font-weight: 700; text-underline-offset: 3px; }
+.post-title { font-weight: 700; text-underline-offset: 3px; position: relative; }
+.post-title::after { content: "→"; display: inline-block; margin-left: .15rem; opacity: 0; transform: translateX(-4px); transition: transform 140ms ease, opacity 140ms ease; }
+.post-card:hover .post-title::after, .post-title:focus-visible::after { opacity: .55; transform: translateX(2px); }
 .post-tags { display: flex; gap: .35rem; flex-wrap: wrap; justify-self: end; }
-.tag { display: inline-flex; align-items: center; gap: .35rem; padding: 2px 8px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 12%, transparent); text-decoration: none; color: color-mix(in srgb, var(--accent) 60%, var(--fg)); font-size: .85em; }
+.tag { position: relative; display: inline-flex; align-items: center; gap: .35rem; padding: 2px 8px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 12%, transparent); text-decoration: none; color: color-mix(in srgb, var(--accent) 60%, var(--fg)); font-size: .85em; overflow: hidden; transition: transform 120ms ease, background 160ms ease; }
 .tag:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.tag:active { transform: translateY(-1px) scale(0.99); }
+.tag::after { content: ""; position: absolute; inset: 0; margin: auto; width: 10px; height: 10px; background: currentColor; opacity: 0; border-radius: 50%; transform: scale(0); pointer-events: none; }
+.tag:active::after { animation: chip-ripple 420ms ease-out; }
 
 .post-meta { color: var(--muted); font-size: .9em; margin-top: .2rem; }
 
 .tag-cloud { margin-top: 2rem; }
 .chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
-.chip { background: color-mix(in srgb, var(--accent) 10%, transparent); color: color-mix(in srgb, var(--accent) 65%, var(--fg)); padding: 6px 10px; border-radius: 12px; cursor: pointer; font: inherit; border: 0; box-shadow: none; -webkit-appearance: none; appearance: none; }
+.chip { position: relative; background: color-mix(in srgb, var(--accent) 10%, transparent); color: color-mix(in srgb, var(--accent) 65%, var(--fg)); padding: 6px 10px; border-radius: 12px; cursor: pointer; font: inherit; border: 0; box-shadow: none; -webkit-appearance: none; appearance: none; overflow: hidden; transition: transform 120ms ease, background 160ms ease; }
+.chip:active { transform: scale(0.98); }
+.chip::after { content: ""; position: absolute; inset: 0; margin: auto; width: 12px; height: 12px; background: currentColor; opacity: 0; border-radius: 999px; transform: scale(0); pointer-events: none; }
+.chip:active::after { animation: chip-ripple 450ms ease-out; }
 .chip:focus-visible { outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 2px; }
 .chip.is-active { background: color-mix(in srgb, var(--accent) 24%, transparent); }
 
 @media (max-width: 36rem) {
   .post-head { grid-template-columns: 1fr; }
   .post-tags { justify-self: start; }
+}
+
+/* Delight animations */
+@keyframes chip-ripple {
+  from { opacity: .18; transform: scale(0); }
+  to { opacity: 0; transform: scale(14); }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
 }
