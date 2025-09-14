@@ -12,7 +12,7 @@ const allTags = Array.from(new Set(all.flatMap(p => p.data.tags ?? []))).sort((a
 const fmt = (d: Date) => d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <Base title="Home Base">
-  <h1>mohsin ismail</h1>
+  <h1>the posts.</h1>
   <ul class="post-list enhanced" id="post-list">
     {posts.map((post) => {
       const tags = post.data.tags ?? [];
