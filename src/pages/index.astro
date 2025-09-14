@@ -54,19 +54,24 @@ const fmt = (d: Date) => d.toLocaleDateString(undefined, { year: 'numeric', mont
     function parseFromQuery() {
       const p = new URLSearchParams(location.search).get('tags');
       (p ? p.split(',') : []).filter(Boolean).forEach(t => selected.add(t));
-      for (const btn of chips.querySelectorAll('[data-tag]')) {
-        const on = selected.has(btn.dataset.tag);
-        btn.classList.toggle('is-active', on);
-        btn.setAttribute('aria-pressed', String(on));
+      if (chips) {
+        for (const btn of chips.querySelectorAll('[data-tag]')) {
+          const tag = btn.getAttribute('data-tag') || '';
+          const on = selected.has(tag);
+          btn.classList.toggle('is-active', on);
+          btn.setAttribute('aria-pressed', String(on));
+        }
       }
     }
 
     function applyFilter() {
       const need = Array.from(selected);
-      for (const item of list.querySelectorAll('.post-card')) {
-        const tags = (item.getAttribute('data-tags') || '').split(',').filter(Boolean);
-        const show = need.every(t => tags.includes(t));
-        item.classList.toggle('is-hidden', !show);
+      if (list) {
+        for (const item of list.querySelectorAll('.post-card')) {
+          const tags = (item.getAttribute('data-tags') || '').split(',').filter(Boolean);
+          const show = need.every(t => tags.includes(t));
+          item.classList.toggle('is-hidden', !show);
+        }
       }
       const q = new URLSearchParams(location.search);
       if (selected.size) q.set('tags', Array.from(selected).join(',')); else q.delete('tags');
@@ -75,10 +80,10 @@ const fmt = (d: Date) => d.toLocaleDateString(undefined, { year: 'numeric', mont
     }
 
     // Toggle via bottom chips
-    chips?.addEventListener('click', (e) => {
-      const target = (e.target as HTMLElement).closest('[data-tag]') as HTMLElement | null;
+    chips && chips.addEventListener('click', (e) => {
+      const target = e.target instanceof Element ? e.target.closest('[data-tag]') : null;
       if (!target) return;
-      const tag = target.dataset.tag!;
+      const tag = target.getAttribute('data-tag') || '';
       if (selected.has(tag)) selected.delete(tag); else selected.add(tag);
       target.classList.toggle('is-active');
       target.setAttribute('aria-pressed', String(target.classList.contains('is-active')));
@@ -86,13 +91,13 @@ const fmt = (d: Date) => d.toLocaleDateString(undefined, { year: 'numeric', mont
     });
 
     // Delegate clicks on inline tag links to act as filters (with fallback navigation if JS disabled)
-    list?.addEventListener('click', (e) => {
-      const a = (e.target as HTMLElement).closest('a[data-filter]') as HTMLAnchorElement | null;
+    list && list.addEventListener('click', (e) => {
+      const a = e.target instanceof Element ? e.target.closest('a[data-filter]') : null;
       if (!a) return;
       e.preventDefault();
-      const tag = a.dataset.filter!;
+      const tag = a.getAttribute('data-filter') || '';
       // sync bottom chip
-      const chip = chips?.querySelector(`[data-tag="${CSS.escape(tag)}"]`);
+      const chip = chips ? chips.querySelector(`[data-tag="${CSS.escape(tag)}"]`) : null;
       if (chip) {
         chip.dispatchEvent(new Event('click', { bubbles: true }));
         return;
