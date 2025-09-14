@@ -109,6 +109,14 @@ h2 { font-size: clamp(1.25rem, 3.2vw, 1.6rem); }
 
 .sr-only { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 
+/* Footer social icons */
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.social { display: inline-flex; align-items: center; gap: .35rem; }
+.social .icon { display: inline-grid; place-items: center; width: 32px; height: 32px; color: var(--muted); border-radius: 8px; text-decoration: none; transition: transform 140ms ease, color 160ms ease, background 160ms ease; position: relative; overflow: hidden; }
+.social .icon:hover, .social .icon:focus-visible { color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); transform: translateY(-1px) scale(1.04) rotate(-1deg); }
+.social .icon:active { transform: translateY(0) scale(.96); }
+.social .icon:focus-visible { outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 2px; }
+
 @media (min-width: 48rem) {
   body { font-size: clamp(17px, 1.2vw, 19px); }
   .container { padding-left: clamp(24px, 3vw, 40px); padding-right: clamp(24px, 3vw, 40px); }
