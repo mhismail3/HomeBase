@@ -1,10 +1,22 @@
 :root {
+  color-scheme: light dark;
   --bg: #fcfcfc;
   --fg: #0b0b0b;
   --muted: #5f6a71;
   --accent: #1d6ef2;
   --rule: #e7eefc;
   --max-ch: 72ch;
+}
+
+/* Dark mode palette: soft contrast, pleasant on OLEDs */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111315;          /* deep gray, not pitch black */
+    --fg: #e7eaee;          /* near-white text */
+    --muted: #9ba4ae;       /* softer secondary */
+    --accent: #7aa2ff;      /* calmer blue for dark */
+    --rule: #232a33;        /* separators */
+  }
 }
 
 html { box-sizing: border-box; }
