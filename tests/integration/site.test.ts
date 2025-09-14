@@ -17,7 +17,7 @@ describe('site build and quality', () => {
     const file = join(dist, 'index.html');
     expect(existsSync(file)).toBe(true);
     const html = readFileSync(file, 'utf8');
-    expect(html).toMatch(/the posts\./i);
+    expect(html).toMatch(/>posts<|>posts\./i);
     expect(html).toMatch(/\/(HomeBase\/)?posts\//);
     expect(html).toMatch(/\/(HomeBase\/)?page\/2\//);
     // date sub-lines
