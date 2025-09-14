@@ -53,14 +53,17 @@ body::before {
 }
 
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--rule);
+  backdrop-filter: saturate(120%) blur(6px);
+  background: color-mix(in srgb, var(--bg) 92%, white 8%);
+}
+.header-inner {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: baseline;
-  border-bottom: 1px solid var(--rule);
-  position: sticky;
-  top: 0;
-  backdrop-filter: saturate(120%) blur(6px);
-  background: color-mix(in srgb, var(--bg) 92%, white 8%);
 }
 
 .brand-link {
@@ -150,9 +153,10 @@ h2 { font-size: clamp(1.25rem, 3.2vw, 1.6rem); }
 .chip:focus-visible { outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 2px; }
 .chip.is-active { background: color-mix(in srgb, var(--accent) 24%, transparent); }
 
+/* Keep tags aligned right even on small screens */
 @media (max-width: 36rem) {
-  .post-head { grid-template-columns: 1fr; }
-  .post-tags { justify-self: start; }
+  .post-head { grid-template-columns: 1fr auto; }
+  .post-tags { justify-self: end; }
 }
 
 /* Delight animations */
