@@ -8,15 +8,100 @@ const base: string = import.meta.env.BASE_URL || '/';
 const PAGE_SIZE = 5;
 const page = { current: 1, last: Math.max(1, Math.ceil(all.length / PAGE_SIZE)) };
 const posts = all.slice(0, PAGE_SIZE);
+const allTags = Array.from(new Set(all.flatMap(p => p.data.tags ?? []))).sort((a, b) => a.localeCompare(b));
+const fmt = (d: Date) => d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <Base title="Home Base">
   <h1>mohsin ismail</h1>
-  <ul class="post-list">
-    {posts.map((post) => (
-      <li>
-        <a class="post-title" href={`${base}posts/${post.slug}/`}>{post.data.title}</a>
-      </li>
-    ))}
+  <ul class="post-list enhanced" id="post-list">
+    {posts.map((post) => {
+      const tags = post.data.tags ?? [];
+      const dateISO = post.data.date.toISOString().slice(0, 10);
+      return (
+        <li class="post-card" data-tags={tags.join(',')}>
+          <div class="post-head">
+            <a class="post-title" href={`${base}posts/${post.slug}/`}>{post.data.title}</a>
+            <div class="post-tags" aria-label="Tags">
+              {tags.map((t) => (
+                <a class="tag" href={`${base}tags/${t}/`} data-filter={t}>{t}</a>
+              ))}
+            </div>
+          </div>
+          <div class="post-meta">
+            <time datetime={dateISO}>{fmt(post.data.date)}</time>
+          </div>
+        </li>
+      );
+    })}
   </ul>
+
   <Pagination {page} {base} />
+
+  <section class="tag-cloud" aria-labelledby="all-tags">
+    <h2 id="all-tags">Browse by tag</h2>
+    <div class="chips" id="tag-filters">
+      {allTags.map((t) => (
+        <button type="button" class="chip" data-tag={t} aria-pressed="false">{t}</button>
+      ))}
+    </div>
+  </section>
+
+  <script type="module">
+    const list = document.getElementById('post-list');
+    const chips = document.getElementById('tag-filters');
+    const selected = new Set();
+
+    function parseFromQuery() {
+      const p = new URLSearchParams(location.search).get('tags');
+      (p ? p.split(',') : []).filter(Boolean).forEach(t => selected.add(t));
+      for (const btn of chips.querySelectorAll('[data-tag]')) {
+        const on = selected.has(btn.dataset.tag);
+        btn.classList.toggle('is-active', on);
+        btn.setAttribute('aria-pressed', String(on));
+      }
+    }
+
+    function applyFilter() {
+      const need = Array.from(selected);
+      for (const item of list.querySelectorAll('.post-card')) {
+        const tags = (item.getAttribute('data-tags') || '').split(',').filter(Boolean);
+        const show = need.every(t => tags.includes(t));
+        item.classList.toggle('is-hidden', !show);
+      }
+      const q = new URLSearchParams(location.search);
+      if (selected.size) q.set('tags', Array.from(selected).join(',')); else q.delete('tags');
+      const url = `${location.pathname}${q.toString() ? '?' + q.toString() : ''}${location.hash}`;
+      history.replaceState(null, '', url);
+    }
+
+    // Toggle via bottom chips
+    chips?.addEventListener('click', (e) => {
+      const target = (e.target as HTMLElement).closest('[data-tag]') as HTMLElement | null;
+      if (!target) return;
+      const tag = target.dataset.tag!;
+      if (selected.has(tag)) selected.delete(tag); else selected.add(tag);
+      target.classList.toggle('is-active');
+      target.setAttribute('aria-pressed', String(target.classList.contains('is-active')));
+      applyFilter();
+    });
+
+    // Delegate clicks on inline tag links to act as filters (with fallback navigation if JS disabled)
+    list?.addEventListener('click', (e) => {
+      const a = (e.target as HTMLElement).closest('a[data-filter]') as HTMLAnchorElement | null;
+      if (!a) return;
+      e.preventDefault();
+      const tag = a.dataset.filter!;
+      // sync bottom chip
+      const chip = chips?.querySelector(`[data-tag="${CSS.escape(tag)}"]`);
+      if (chip) {
+        chip.dispatchEvent(new Event('click', { bubbles: true }));
+        return;
+      }
+      if (selected.has(tag)) selected.delete(tag); else selected.add(tag);
+      applyFilter();
+    });
+
+    parseFromQuery();
+    applyFilter();
+  </script>
 </Base>

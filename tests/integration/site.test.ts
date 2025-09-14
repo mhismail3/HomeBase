@@ -13,13 +13,18 @@ describe('site build and quality', () => {
     execSync('npm run --silent build', { stdio: 'inherit' });
   }, 180000);
 
-  it('produces an index.html with base-aware links and pagination', () => {
+  it('produces an index.html with base-aware links, dates, tags, and pagination', () => {
     const file = join(dist, 'index.html');
     expect(existsSync(file)).toBe(true);
     const html = readFileSync(file, 'utf8');
     expect(html).toMatch(/mohsin ismail/i);
     expect(html).toMatch(/\/(HomeBase\/)?posts\//);
     expect(html).toMatch(/\/(HomeBase\/)?page\/2\//);
+    // date sub-lines
+    expect(html).toMatch(/<time datetime=\"\d{4}-\d{2}-\d{2}\"/);
+    // tag chips and tag cloud
+    expect(html).toMatch(/class=\"tag\"/);
+    expect(html).toMatch(/id=\"tag-filters\"/);
   });
 
   it('renders the welcome post page', () => {

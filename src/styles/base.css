@@ -112,3 +112,27 @@ h2 { font-size: clamp(1.25rem, 3.2vw, 1.6rem); }
 @media (min-width: 48rem) {
   .job-title { font-size: 1.05rem; }
 }
+
+/* Index: enhanced list, tags, filters */
+.post-list.enhanced { list-style: none; padding: 0; margin: 0; }
+.post-card { position: relative; padding: .6rem .75rem; border-radius: 10px; transition: transform .18s ease, background .18s ease, box-shadow .18s ease, border-radius .18s ease; }
+.post-card:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 20%, transparent); transform: translateY(-1px); border-radius: 14px; }
+.post-card.is-hidden { display: none; }
+
+.post-head { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: .25rem .75rem; }
+.post-title { font-weight: 700; text-underline-offset: 3px; }
+.post-tags { display: flex; gap: .35rem; flex-wrap: wrap; justify-self: end; }
+.tag { display: inline-flex; align-items: center; gap: .35rem; padding: 2px 8px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 12%, transparent); text-decoration: none; color: color-mix(in srgb, var(--accent) 60%, var(--fg)); border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); font-size: .85em; }
+.tag:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); }
+
+.post-meta { color: var(--muted); font-size: .9em; margin-top: .2rem; }
+
+.tag-cloud { margin-top: 2rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
+.chip { border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent); background: color-mix(in srgb, var(--accent) 10%, transparent); color: color-mix(in srgb, var(--accent) 65%, var(--fg)); padding: 6px 10px; border-radius: 12px; cursor: pointer; font: inherit; }
+.chip.is-active { background: color-mix(in srgb, var(--accent) 18%, transparent); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 45%, transparent); }
+
+@media (max-width: 36rem) {
+  .post-head { grid-template-columns: 1fr; }
+  .post-tags { justify-self: start; }
+}
