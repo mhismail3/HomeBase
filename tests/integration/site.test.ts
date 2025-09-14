@@ -45,6 +45,16 @@ describe('site build and quality', () => {
     expect(html).toMatch(/posts\//);
   });
 
+  it('renders a mobile-friendly resume page', () => {
+    const file = join(dist, 'resume', 'index.html');
+    expect(existsSync(file)).toBe(true);
+    const html = readFileSync(file, 'utf8');
+    expect(html).toMatch(/Mohsin Ismail/i);
+    expect(html).toMatch(/Experience/i);
+    expect(html).toMatch(/Amazon/i);
+    expect(html).toMatch(/Epic Systems/i);
+  });
+
   it('has no broken internal links', () => {
     const issues = checkLinks(dist);
     expect(issues).toEqual([]);

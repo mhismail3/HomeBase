@@ -1,0 +1,112 @@
+---
+import Base from '../layouts/Base.astro';
+const base: string = import.meta.env.BASE_URL || '/';
+const title = 'Resume — Mohsin Ismail';
+---
+<Base {title} description="Resume for Mohsin Ismail">
+  <article class="resume" itemscope itemtype="https://schema.org/Person">
+    <header class="resume-header">
+      <h1 itemprop="name">Mohsin Ismail</h1>
+      <p class="contact">
+        <span>Seattle, WA 98121</span>
+        <span aria-hidden="true">·</span>
+        <a rel="me" href="mailto:mhsimali3@gmail.com">mhsimali3@gmail.com</a>
+        <span aria-hidden="true">·</span>
+        <span>(630) 677-9325</span>
+        <span aria-hidden="true">·</span>
+        <a rel="me" href="https://www.linkedin.com/in/mhismail3/">linkedin.com/in/mhismail3</a>
+        <span aria-hidden="true">·</span>
+        <a rel="me" href="https://github.com/mhismail3">github.com/mhismail3</a>
+        <span aria-hidden="true">·</span>
+        <a rel="me" href="https://mhismail.com/">mhismail.com</a>
+      </p>
+    </header>
+
+    <section>
+      <h2>Experience</h2>
+      <div class="job">
+        <div class="job-meta">
+          <div class="job-title">
+            <strong>Amazon — Devices &amp; Services Trust and Privacy</strong>
+            <span class="role">Software Engineer II — Seattle, WA</span>
+          </div>
+          <div class="dates">
+            <time datetime="2022-07">Jul 2022</time> — <time datetime="present">Present</time>
+          </div>
+        </div>
+        <ul>
+          <li>Led end‑to‑end delivery of a new Alexa privacy intake platform, onboarding 150+ projects in 3 months and reducing average compliance review times by 5×; directly accelerated launches for 30+ Alexa teams and 15+ new Alexa services, including those powered by Alexa‑adjacent generative AI.</li>
+          <li>Established foundational data compliance automation by implementing an Alexa+ auditing service, automating daily analysis across 20+ core Alexa+ services to proactively surface unauthorized data access, reduce compliance risk, and accelerate stakeholder audit cycles for LLM‑driven experiences.</li>
+          <li>Drove cross‑team initiatives to deliver critical privacy‑by‑design tooling, including advanced logging, metrics, and anomaly detection for a core Alexa+ library, enabling near real‑time detection of privacy risks in LLM and Alexa+ workflows and supporting 2024 strategic privacy objectives.</li>
+          <li>Root‑caused and resolved critical customer‑facing issues (e.g., persistent DR.SAM data integrity bugs and platform stability risks), delivering zero customer‑reported errors post‑fix and measurably enhancing user trust and tool adoption.</li>
+          <li>Championed codebase modernization and scalability, leading comprehensive front‑end and back‑end refactors that cut onboarding time for new developers, improved maintainability, and accelerated feature delivery with zero deadline slips.</li>
+          <li>Authored strategic roadmaps and technical designs (Developer Experience, Compliance Automation, automated Campaigning, and Privacy‑as‑Code integration), directly shaping the safe and ethical scaling of AI and LLM technologies within Alexa and earning increased ownership of cross‑org compliance initiatives.</li>
+          <li>Led the 2023 Mandatory Migrations program across the org, partnering with leadership to track and complete service migrations out of the DUB region and upgrades to JDK17, ensuring the organization met OE compliance and minimized operational risk.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-meta">
+          <div class="job-title">
+            <strong>Epic Systems — In Basket</strong>
+            <span class="role">Software Engineer — Verona, WI</span>
+          </div>
+          <div class="dates">
+            <time datetime="2019-08">Aug 2019</time> — <time datetime="2022-06">Jun 2022</time>
+          </div>
+        </div>
+        <ul>
+          <li>Delivered 90+ enhancements and fixes across 10+ major version releases, elevating usability and reliability for clinicians and support staff while maintaining backward compatibility over 3+ years.</li>
+          <li>Spearheaded the “Manage Users” project, collaborating cross‑functionally to streamline patient task delegation, reduce onboarding friction, and improve hospital workflow efficiency.</li>
+          <li>Partnered with hospital analysts and end users to refine features based on real‑world feedback, driving adoption and ensuring solutions met clinical needs.</li>
+          <li>Optimized database indices and patient message routing, accelerating response times and enabling faster, more accurate patient care.</li>
+          <li>Enabled regulatory compliance and data‑driven insights by integrating advanced reporting tools for patient data extraction, supporting hospitals’ 21st Century Cures Act readiness.</li>
+          <li>Mentored new team members and led R&amp;D meetings, strengthening team expertise, onboarding, and knowledge sharing during periods of rapid delivery.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <ul class="edu">
+        <li>
+          <strong>M.S. Software Engineering</strong> — DePaul University
+          <span class="dates"><time datetime="2017-01">Jan 2017</time> — <time datetime="2019-06">Jun 2019</time></span>
+        </li>
+        <li>
+          <strong>B.S. Bioengineering</strong> — University of Illinois at Urbana‑Champaign
+          <span class="dates"><time datetime="2012-08">Aug 2012</time> — <time datetime="2016-05">May 2016</time></span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <div class="skills">
+        <p>
+          <strong>Languages &amp; Frameworks:</strong>
+          TypeScript, JavaScript, Java, JSON, Python, SQL, C#, Swift, SwiftUI, XML, Node.js, React.js, Next.js,
+          Redux Toolkit, Jest, RESTful API Design, GraphQL, Microservices, PyTorch, TensorFlow, NumPy
+        </p>
+        <p>
+          <strong>Cloud, DevOps &amp; Data:</strong>
+          AWS (ECS, Fargate, Lambda, S3, CloudWatch, SNS, SQS, API Gateway), AWS CLI/CI/CD, Docker,
+          Infrastructure as Code, PostgreSQL, DynamoDB, SQL Server, Data Modeling, ETL Pipelines
+        </p>
+        <p>
+          <strong>AI, LLM &amp; Data Governance:</strong>
+          LLM‑adjacent architecture (data governance, privacy, lineage, compliance for generative AI), anomaly
+          detection pipelines, data privacy, policy enforcement, and traceability for AI/ML and LLM‑powered systems
+        </p>
+        <p>
+          <strong>Leadership &amp; Delivery:</strong>
+          Agile/Scrum, Stakeholder Engagement, Product Development Lifecycle, Cross‑Functional Collaboration,
+          Roadmap Planning, Process Automation, Change &amp; Risk Management, Operational Excellence
+        </p>
+      </div>
+    </section>
+
+  </article>
+</Base>
+
+<!-- styles live in src/styles/base.css -->

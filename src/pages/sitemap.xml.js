@@ -3,6 +3,7 @@ export async function GET({ site }) {
   const pages = [
     '',
     'about/',
+    'resume/',
     'tags/',
     'feed.xml'
   ];
