@@ -32,7 +32,11 @@ export function checkLinks(distDir: string): string[] {
       // Map directories to index.html
       if (statMaybe(targetPath)?.isDirectory()) targetPath = join(targetPath, 'index.html');
       if (targetPath.endsWith('/')) targetPath += 'index.html';
-      if (targetPath.endsWith('.xml')) return statMaybe(targetPath) != null;
+      // Allow non-HTML assets (images, PDFs, icons)
+      const assetExts = ['.xml', '.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico', '.pdf'];
+      for (const ext of assetExts) {
+        if (targetPath.endsWith(ext)) return statMaybe(targetPath) != null;
+      }
       if (!targetPath.endsWith('.html')) targetPath = join(targetPath, 'index.html');
       return filesSet.has(normalize(targetPath));
     } catch {
