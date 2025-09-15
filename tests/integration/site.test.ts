@@ -27,11 +27,12 @@ describe('site build and quality', () => {
     expect(html).toMatch(/id=\"tag-filters\"/);
   });
 
-  it('renders the welcome post page', () => {
-    const file = join(dist, 'posts', '2025-01-01-welcome', 'index.html');
+  it('renders a portfolio project page (Loops)', () => {
+    const file = join(dist, 'posts', '2023-10-30-loops-tasks-app', 'index.html');
     expect(existsSync(file)).toBe(true);
     const html = readFileSync(file, 'utf8');
-    expect(html).toContain('Welcome');
+    expect(html).toMatch(/Loops/i);
+    expect(html).toMatch(/10\/15\/23/);
   });
 
   it('generates a feed', () => {
@@ -44,9 +45,9 @@ describe('site build and quality', () => {
   it('builds tag index and a tag detail page', () => {
     const tagIndex = join(dist, 'tags', 'index.html');
     expect(existsSync(tagIndex)).toBe(true);
-    const metaTag = join(dist, 'tags', 'meta', 'index.html');
-    expect(existsSync(metaTag)).toBe(true);
-    const html = readFileSync(metaTag, 'utf8');
+    const portfolioTag = join(dist, 'tags', 'portfolio', 'index.html');
+    expect(existsSync(portfolioTag)).toBe(true);
+    const html = readFileSync(portfolioTag, 'utf8');
     expect(html).toMatch(/posts\//);
   });
 
