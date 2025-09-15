@@ -4,6 +4,9 @@ date: 2019-03-19
 summary: A simple movie recommender using keyword and ratings similarity.
 tags: [portfolio, python, ml]
 hero: /portfolio/rotten-potatoes/rottenpotatoes-header.png
+dateRange: 01/02/19 – 03/19/19
+hours: ~35–40 hrs
+tech: [Python, HTML, CSS]
 draft: false
 ---
 
@@ -24,4 +27,3 @@ You can view the final project report <a href="/portfolio/rotten-potatoes/Rotten
 </figure>
 
 Future directions we discussed included better text features (e.g., TF‑IDF with bigrams), normalizing ratings by user, and trying a light matrix factorization for collaborative filtering.
-

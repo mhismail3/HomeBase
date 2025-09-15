@@ -18,6 +18,15 @@ const projects = (await getCollection('posts', ({ data }) => !data.draft && (dat
         <div class="project-body">
           <h2 class="project-title"><a href={`${base}posts/${p.slug}/`}>{p.data.title}</a></h2>
           {p.data.summary && <p class="project-summary">{p.data.summary}</p>}
+          {(p.data.dateRange || p.data.hours || p.data.tech) && (
+            <p class="project-meta">
+              {p.data.dateRange && <span class="meta-chip">{p.data.dateRange}</span>}
+              {p.data.hours && <span class="meta-chip">{p.data.hours}</span>}
+              {p.data.tech && p.data.tech.length > 0 && (
+                <span class="meta-chip">{p.data.tech.join(', ')}</span>
+              )}
+            </p>
+          )}
           {p.data.tags && (
             <div class="project-tags" aria-label="Tags">
               {(p.data.tags || []).map((t) => (
@@ -44,6 +53,8 @@ const projects = (await getCollection('posts', ({ data }) => !data.draft && (dat
   .project-title a { text-decoration: none; color: inherit; border-bottom: 1px solid transparent; }
   .project-title a:hover { border-bottom-color: var(--rule); }
   .project-summary { margin: 0; color: var(--muted); }
+  .project-meta { margin: .35rem 0 0; color: var(--muted); font-size: .85em; display: flex; flex-wrap: wrap; gap: .35rem; }
+  .meta-chip { background: color-mix(in srgb, var(--accent) 10%, transparent); border-radius: 999px; padding: 2px 10px; }
   .project-tags { margin-top: .5rem; display: flex; gap: .35rem; flex-wrap: wrap; }
   .project-tags .tag { background: color-mix(in srgb, var(--accent) 12%, transparent); border-radius: 12px; padding: 2px 8px; font-size: .82em; text-decoration: none; color: color-mix(in srgb, var(--accent) 65%, var(--fg)); }
 </style>

@@ -7,6 +7,10 @@ const posts = defineCollection({
     date: z.coerce.date(),
     summary: z.string().max(280).optional(),
     hero: z.string().optional(),
+    // Portfolio metadata (optional; shown when tags include 'portfolio')
+    dateRange: z.string().optional(),
+    hours: z.string().optional(),
+    tech: z.array(z.string()).optional(),
     tags: z.array(z.string()).optional(),
     draft: z.boolean().default(false)
   })
