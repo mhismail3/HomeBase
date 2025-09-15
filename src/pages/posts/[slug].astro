@@ -12,6 +12,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { title, date } = post.data;
+const base: string = import.meta.env.BASE_URL || '/';
 const { Content } = await post.render();
 ---
 <Base title={`${title} — Home Base`}>
@@ -22,8 +23,8 @@ const { Content } = await post.render();
     </header>
     <Content />
   </article>
-  <script type="module">
-    const base = import.meta.env.BASE_URL || '/';
+  <script is:inline>
+    const base = ${JSON.stringify(base)};
     // Prefix leading-slash image src/hrefs with base for GitHub Pages subpaths
     for (const el of document.querySelectorAll('article img[src^="/"], article a[href^="/"]')) {
       const attr = el.tagName === 'A' ? 'href' : 'src';
