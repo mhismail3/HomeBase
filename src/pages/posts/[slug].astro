@@ -21,7 +21,9 @@ const { Content } = await post.render();
   <article data-base={base}>
     <header>
       <h1>{title}</h1>
-      <p><time datetime={date.toISOString()}>{dateUS}</time></p>
+      {!isProject && (
+        <p><time datetime={date.toISOString()}>{dateUS}</time></p>
+      )}
       {isProject && (post.data.dateRange || post.data.hours || post.data.tech) && (
         <p class="meta-row">
           {post.data.dateRange && <span class="meta-chip">{post.data.dateRange}</span>}
