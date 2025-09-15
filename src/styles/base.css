@@ -114,6 +114,7 @@ h2 { font-size: clamp(1.25rem, 3.2vw, 1.6rem); }
 .social { display: inline-flex; align-items: center; gap: .4rem; line-height: 1; font-size: .8em; }
 .social .icon { display: inline-grid; place-items: center; width: 28px; height: 28px; color: var(--muted); border-radius: 6px; text-decoration: none; transition: transform 120ms ease, color 140ms ease, background 140ms ease; position: relative; overflow: hidden; }
 .social .icon svg { width: 1em; height: 1em; display: block; }
+.social .icon-linkedin svg { transform: scale(1.1); transform-origin: center; }
 .social .icon:hover, .social .icon:focus-visible { color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); transform: translateY(-1px) scale(1.03); }
 .social .icon:active { transform: translateY(0) scale(.97); }
 .social .icon:focus-visible { outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 2px; }
