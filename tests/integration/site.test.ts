@@ -32,7 +32,7 @@ describe('site build and quality', () => {
     expect(existsSync(file)).toBe(true);
     const html = readFileSync(file, 'utf8');
     expect(html).toMatch(/Loops/i);
-    expect(html).toMatch(/10\/15\/23/);
+    expect(html).toMatch(/10\/15\/2023/);
   });
 
   it('generates a feed', () => {
