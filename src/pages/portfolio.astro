@@ -12,7 +12,7 @@ const projects = (await getCollection('posts', ({ data }) => !data.draft && (dat
       <article class="project-card">
         {p.data.hero && (
           <a class="hero" href={`${base}posts/${p.slug}/`}>
-            <img src={p.data.hero} alt="{p.data.title} cover" loading="lazy" />
+            <img src={`${base}${String(p.data.hero).replace(/^\//,'')}`} alt={`${p.data.title} cover`} loading="lazy" decoding="async" />
           </a>
         )}
         <div class="project-body">
