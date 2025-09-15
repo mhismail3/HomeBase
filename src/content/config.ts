@@ -6,6 +6,7 @@ const posts = defineCollection({
     title: z.string(),
     date: z.coerce.date(),
     summary: z.string().max(280).optional(),
+    hero: z.string().optional(),
     tags: z.array(z.string()).optional(),
     draft: z.boolean().default(false)
   })

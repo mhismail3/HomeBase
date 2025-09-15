@@ -21,3 +21,4 @@ reports/
 .env.*.local
 Thumbs.db
 Icon?
+old-project/
