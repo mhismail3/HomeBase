@@ -16,7 +16,7 @@ const base: string = import.meta.env.BASE_URL || '/';
 const { Content } = await post.render();
 ---
 <Base title={`${title} — Home Base`}>
-  <article>
+  <article data-base={base}>
     <header>
       <h1>{title}</h1>
       <p><time datetime={date.toISOString()}>{date.toISOString().slice(0,10)}</time></p>
@@ -24,7 +24,8 @@ const { Content } = await post.render();
     <Content />
   </article>
   <script is:inline>
-    const base = ${JSON.stringify(base)};
+    const el = document.querySelector('article[data-base]');
+    const base = el ? el.getAttribute('data-base') || '/' : '/';
     // Prefix leading-slash image src/hrefs with base for GitHub Pages subpaths
     for (const el of document.querySelectorAll('article img[src^="/"], article a[href^="/"]')) {
       const attr = el.tagName === 'A' ? 'href' : 'src';
