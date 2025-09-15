@@ -103,8 +103,7 @@ h1 { font-size: clamp(1.6rem, 5vw, 2.25rem); margin: 0.5rem 0 1rem; }
 h2 { font-size: clamp(1.25rem, 3.2vw, 1.6rem); }
 
 .post-list { list-style: none; padding: 0; margin: 0; }
-.post-list li { margin: clamp(18px, 3.2vw, 28px) 0; padding-left: 0.25rem; border-left: 2px solid transparent; transition: border-color .2s ease, transform .2s ease; }
-.post-list li:hover { border-left-color: var(--rule); transform: translateX(2px); }
+.post-list li { margin: clamp(18px, 3.2vw, 28px) 0; }
 .post-title { font-weight: 700; }
 
 .sr-only { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
@@ -150,25 +149,47 @@ h2 { font-size: clamp(1.25rem, 3.2vw, 1.6rem); }
 
 /* Index: enhanced list, tags, filters */
 .post-list.enhanced { list-style: none; padding: 0; margin: 0; }
-.post-card { position: relative; padding: .6rem .75rem; border-radius: 10px; transition: background .18s ease, border-radius .18s ease; border: 1px solid transparent; }
+.post-card { position: relative; padding: .6rem 0; border-radius: 10px; transition: border-radius .18s ease; border: 1px solid transparent; z-index: 0; }
+/* Render hover/focus background using an underlay that is slightly larger than the card
+   so text stays flush while the glow has breathing room on both sides. */
+.post-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* Negative insets make the underlay slightly larger than the card */
+  left: -0.6rem;
+  right: -0.6rem;
+  border-radius: 10px;
+  background: transparent;
+  pointer-events: none;
+  transition: background .18s ease, border-radius .18s ease, transform .18s ease;
+  /* Ensure the underlay never obscures content */
+  z-index: -1;
+}
 /* Desktop hover: delightful light-blue tint */
 @media (hover: hover) and (pointer: fine) {
-  .post-card:hover { background: color-mix(in srgb, var(--accent) 12%, var(--bg)); border-radius: 14px; }
+  .post-card:hover { border-radius: 14px; }
+  .post-card:hover::before { background: color-mix(in srgb, var(--accent) 12%, var(--bg)); border-radius: 14px; }
 }
 /* Touch feedback: quick, slightly stronger tint while pressed */
 @media (hover: none) {
-  .post-card:active { background: color-mix(in srgb, var(--accent) 16%, var(--bg)); }
+  .post-card:active::before { background: color-mix(in srgb, var(--accent) 16%, var(--bg)); border-radius: 14px; }
 }
 /* Keyboard focus: accessible highlight without motion */
-.post-card:focus-within { background: color-mix(in srgb, var(--accent) 10%, var(--bg)); border-radius: 14px; outline: 2px solid color-mix(in srgb, var(--accent) 35%, transparent); outline-offset: 2px; }
+.post-card:focus-within { border-radius: 14px; outline: 2px solid color-mix(in srgb, var(--accent) 35%, transparent); outline-offset: 2px; }
+.post-card:focus-within::before { background: color-mix(in srgb, var(--accent) 10%, var(--bg)); border-radius: 14px; }
 .post-card.is-hidden { display: none; }
 
 .post-head { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: .25rem .75rem; }
+.post-head > *:first-child { padding-left: 0; }
+.post-head > *:last-child { padding-right: 0; }
 .post-title { font-weight: 700; text-underline-offset: 3px; position: relative; }
+.post-date { color: var(--muted); font-size: .9em; white-space: nowrap; justify-self: end; }
 .post-title::after { content: "→"; display: inline-block; margin-left: .15rem; opacity: 0; transform: translateX(-4px); transition: transform 140ms ease, opacity 140ms ease; }
 .post-card:hover .post-title::after, .post-title:focus-visible::after { opacity: .55; transform: translateX(2px); }
-.post-tags { display: flex; gap: .35rem; flex-wrap: wrap; justify-self: end; }
-.tag { position: relative; display: inline-flex; align-items: center; gap: .35rem; padding: 2px 8px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 12%, transparent); text-decoration: none; color: color-mix(in srgb, var(--accent) 60%, var(--fg)); font-size: .85em; overflow: hidden; transition: transform 120ms ease, background 160ms ease; }
+.post-tags { display: flex; gap: .35rem; flex-wrap: wrap; margin-top: .25rem; }
+.tag { position: relative; display: inline-flex; align-items: center; gap: .35rem; padding: 2px 8px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 12%, transparent); text-decoration: none; color: color-mix(in srgb, var(--accent) 60%, var(--fg)); font-size: .8em; overflow: hidden; transition: transform 120ms ease, background 160ms ease; }
 .tag:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); }
 .tag:active { transform: translateY(-1px) scale(0.99); }
 .tag::after { content: ""; position: absolute; inset: 0; margin: auto; width: 10px; height: 10px; background: currentColor; opacity: 0; border-radius: 50%; transform: scale(0); pointer-events: none; }
@@ -179,18 +200,19 @@ article .meta-row { margin: .25rem 0 .5rem; color: var(--muted); font-size: .9em
 article .meta-chip { background: color-mix(in srgb, var(--accent) 10%, transparent); border-radius: 999px; padding: 2px 10px; }
 
 .tag-cloud { margin-top: 2rem; }
-.chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; }
-.chip { position: relative; background: color-mix(in srgb, var(--accent) 10%, transparent); color: color-mix(in srgb, var(--accent) 65%, var(--fg)); padding: 6px 10px; border-radius: 12px; cursor: pointer; font: inherit; border: 0; box-shadow: none; -webkit-appearance: none; appearance: none; overflow: hidden; transition: transform 120ms ease, background 160ms ease; }
+.tag-cloud-head { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .5rem .75rem; }
+.tag-cloud-head h2 { font-size: 1.05rem; color: var(--fg); margin: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .5rem; }
+.chip { position: relative; background: color-mix(in srgb, var(--accent) 8%, transparent); color: color-mix(in srgb, var(--accent) 55%, var(--fg)); padding: 3px 7px; border-radius: 12px; cursor: pointer; font: inherit; font-size: .75em; border: 0; box-shadow: none; -webkit-appearance: none; appearance: none; overflow: hidden; transition: transform 120ms ease, background 160ms ease; }
 .chip:active { transform: scale(0.98); }
 .chip::after { content: ""; position: absolute; inset: 0; margin: auto; width: 12px; height: 12px; background: currentColor; opacity: 0; border-radius: 999px; transform: scale(0); pointer-events: none; }
 .chip:active::after { animation: chip-ripple 450ms ease-out; }
 .chip:focus-visible { outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent); outline-offset: 2px; }
-.chip.is-active { background: color-mix(in srgb, var(--accent) 24%, transparent); }
+.chip.is-active { background: color-mix(in srgb, var(--accent) 18%, transparent); }
 
-/* Keep tags aligned right even on small screens */
+/* Post list layout remains readable on small screens */
 @media (max-width: 36rem) {
   .post-head { grid-template-columns: 1fr auto; }
-  .post-tags { justify-self: end; }
 }
 
 /* Delight animations */

@@ -21,13 +21,25 @@ const posts = all.slice(start, start + PAGE_SIZE);
 const page = { current: pageNum, last: Math.max(1, Math.ceil(all.length / PAGE_SIZE)) };
 ---
 <Base title={`Page ${pageNum} — Home Base`}>
-  <h1>mohsin ismail</h1>
-  <ul class="post-list">
-    {posts.map((post) => (
-      <li>
-        <a class="post-title" href={`${base}posts/${post.slug}/`}>{post.data.title}</a>
-      </li>
-    ))}
+  <h1>posts</h1>
+  <ul class="post-list enhanced" id="post-list">
+    {posts.map((post) => {
+      const tags = post.data.tags ?? [];
+      const dateISO = post.data.date.toISOString().slice(0, 10);
+      return (
+        <li class="post-card" data-tags={tags.join(',')}>
+          <div class="post-head">
+            <a class="post-title" href={`${base}posts/${post.slug}/`}>{post.data.title}</a>
+            <time class="post-date" datetime={dateISO}>{new Date(post.data.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+          </div>
+          <div class="post-tags" aria-label="Tags">
+            {tags.map((t) => (
+              <a class="tag" href={`${base}tags/${t}/`} data-filter={t}>{t}</a>
+            ))}
+          </div>
+        </li>
+      );
+    })}
   </ul>
   <Pagination {page} {base} />
 </Base>

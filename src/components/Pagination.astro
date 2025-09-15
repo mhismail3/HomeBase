@@ -7,12 +7,13 @@ const { page, base } = Astro.props as { page: { current: number, last: number },
       <a href={`${base}${page.current === 2 ? '' : `page/${page.current - 1}/`}`}>← newer</a>
     )}
     {page.current < page.last && (
-      <a style="float:right" href={`${base}page/${page.current + 1}/`}>older →</a>
+      <a class="older" href={`${base}page/${page.current + 1}/`}>older →</a>
     )}
   </nav>
 )}
 
 <style>
-.pagination { margin-top: 1.25rem; }
+.pagination { margin-top: 1.25rem; display: flex; gap: .75rem; align-items: center; }
+.pagination .older { font-weight: 700; }
 </style>
 
