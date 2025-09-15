@@ -4,9 +4,10 @@ date: 2019-03-19
 summary: A simple movie recommender using keyword and ratings similarity.
 tags: [portfolio, python, ml]
 hero: /portfolio/rotten-potatoes/rottenpotatoes-header.png
-dateRange: 01/02/19 – 03/19/19
+dateRange: 01/02/2019 – 03/19/2019
 hours: ~35–40 hrs
 tech: [Python, HTML, CSS]
+order: 2
 draft: false
 ---
 

@@ -4,7 +4,7 @@ date: 2018-03-18
 summary: A faithful Space Invaders clone with design patterns over an Azul-based framework.
 tags: [portfolio, csharp, cpp]
 hero: /portfolio/space-invaders/spaceinvaders-gameplay.png
-dateRange: 01/02/18 – 03/18/18
+dateRange: 01/02/2018 – 03/18/2018
 hours: ~45–50 hrs
 tech: [C#, C++]
 draft: false

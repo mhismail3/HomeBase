@@ -4,9 +4,10 @@ date: 2023-10-30
 summary: A prototype task manager for iOS built with SwiftUI.
 tags: [portfolio, ios, swiftui]
 hero: /portfolio/loops/TasksAppHeader.png
-dateRange: 10/15/23 – 10/30/23
+dateRange: 10/15/2023 – 10/30/2023
 hours: ~20 hrs
 tech: [SwiftUI]
+order: 1
 draft: false
 ---
 
@@ -31,4 +32,3 @@ The back end used Google Firebase/Firestore which pushed changes to the front en
 </figure>
 
 This was an incredibly enjoyable project: using Xcode and SwiftUI to rapidly design and iterate on mobile UI/UX, deploy to my devices for real‑world testing, and get fast feedback. One day, I hope to return and flesh it out further (maybe even ship it to the App Store!).
-

@@ -11,6 +11,7 @@ const posts = defineCollection({
     dateRange: z.string().optional(),
     hours: z.string().optional(),
     tech: z.array(z.string()).optional(),
+    order: z.number().optional(),
     tags: z.array(z.string()).optional(),
     draft: z.boolean().default(false)
   })

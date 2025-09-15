@@ -4,7 +4,7 @@ date: 2017-08-07
 summary: A minimal, animated portfolio site built with HTML, CSS/Sass, and a little jQuery.
 tags: [portfolio, html, javascript, jquery, css, sass]
 hero: /portfolio/personal-website/personal-website-header.gif
-dateRange: 07/02/17 – 08/07/17
+dateRange: 07/02/2017 – 08/07/2017
 hours: ~40 hrs
 tech: [HTML, JavaScript, jQuery, CSS, Sass]
 draft: false

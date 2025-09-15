@@ -4,7 +4,7 @@ date: 2017-06-07
 summary: A popular dark theme for the Brackets editor, written in Less.
 tags: [portfolio, css, less]
 hero: /portfolio/introversed-brackets/introversed-brackets-theme-bg.png
-dateRange: 06/06/17 – 06/07/17
+dateRange: 06/06/2017 – 06/07/2017
 hours: ~1.5 hrs
 tech: [CSS, Less]
 draft: false
