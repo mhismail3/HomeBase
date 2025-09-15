@@ -206,8 +206,16 @@ h2 { font-size: clamp(1.25rem, 3.2vw, 1.6rem); }
 article .pin { position: relative; display: block; background: var(--bg); border: 1px solid var(--rule); border-radius: 12px; padding: .35rem; margin: 0.5rem auto 1rem; max-width: min(100%, 520px); box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 15%, transparent); }
 article .pin.full { max-width: 100%; }
 article .pin img { display: block; width: 100%; height: auto; border-radius: 8px; }
-article .pin::before { content: ""; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 55%, var(--bg)); box-shadow: 0 1px 0 rgba(0,0,0,.25); }
-article .pin.pin-left { float: left; margin-right: 1rem; }
+/* skeuomorphic tape strips */
+article .pin::before,
+article .pin::after { content: ""; position: absolute; top: -10px; width: 40%; height: 22px; border-radius: 4px; pointer-events: none; opacity: .9; box-shadow: 0 4px 6px rgba(0,0,0,.18), 0 1px 0 rgba(255,255,255,.35) inset; background:
+  linear-gradient(to bottom, color-mix(in srgb, #fff 72%, var(--bg) 28%), color-mix(in srgb, #fff 58%, var(--bg) 42%)),
+  repeating-linear-gradient( -45deg, rgba(0,0,0,.06) 0 6px, rgba(255,255,255,.08) 6px 12px );
+  mix-blend-mode: normal;
+}
+article .pin::before { left: 8%; transform: rotate(-3deg); }
+article .pin::after { right: 8%; transform: rotate(2deg); }
+article .pin.pin-left { float: left; margin-right: 1rem; max-width: min(100%, 360px); }
 article .pin.pin-right { float: right; margin-left: 1rem; }
 @media (max-width: 48rem) {
   article .pin.pin-left, article .pin.pin-right { float: none; margin: 0.5rem auto 1rem; }
