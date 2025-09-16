@@ -25,13 +25,10 @@ const projects = (await getCollection('posts', ({ data }) => !data.draft && (dat
         <div class="project-body">
           <h2 class="project-title"><a href={`${base}posts/${p.slug}/`}>{p.data.title}</a></h2>
           {p.data.summary && <p class="project-summary">{p.data.summary}</p>}
-          {(p.data.dateRange || p.data.hours || p.data.tech) && (
+          {(p.data.dateRange || p.data.hours) && (
             <p class="project-meta">
               {p.data.dateRange && <span class="meta-chip">{p.data.dateRange}</span>}
               {p.data.hours && <span class="meta-chip">{p.data.hours}</span>}
-              {p.data.tech && p.data.tech.length > 0 && (
-                <span class="meta-chip">{p.data.tech.join(', ')}</span>
-              )}
             </p>
           )}
           {p.data.tags && (

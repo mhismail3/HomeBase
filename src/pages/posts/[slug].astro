@@ -24,13 +24,10 @@ const { Content } = await post.render();
       {!isProject && (
         <p><time datetime={date.toISOString()}>{dateUS}</time></p>
       )}
-      {isProject && (post.data.dateRange || post.data.hours || post.data.tech) && (
+      {isProject && (post.data.dateRange || post.data.hours) && (
         <p class="meta-row">
           {post.data.dateRange && <span class="meta-chip">{post.data.dateRange}</span>}
           {post.data.hours && <span class="meta-chip">{post.data.hours}</span>}
-          {post.data.tech && post.data.tech.length > 0 && (
-            <span class="meta-chip">{post.data.tech.join(', ')}</span>
-          )}
         </p>
       )}
     </header>
