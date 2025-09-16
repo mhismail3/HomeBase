@@ -17,27 +17,29 @@ const projects = (await getCollection('posts', ({ data }) => !data.draft && (dat
   <section class="project-grid">
     {projects.map((p) => (
       <article class="project-card">
-        {p.data.hero && (
-          <a class="hero" href={`${base}posts/${p.slug}/`}>
-            <img src={`${base}${String(p.data.hero).replace(/^\//,'')}`} alt={`${p.data.title} cover`} loading="lazy" decoding="async" />
-          </a>
-        )}
-        <div class="project-body">
-          <h2 class="project-title"><a href={`${base}posts/${p.slug}/`}>{p.data.title}</a></h2>
-          {p.data.summary && <p class="project-summary">{p.data.summary}</p>}
-          {(p.data.dateRange || p.data.hours) && (
-            <p class="project-meta">
-              {p.data.dateRange && <span class="meta-chip">{p.data.dateRange}</span>}
-              {p.data.hours && <span class="meta-chip">{p.data.hours}</span>}
-            </p>
+        <div class="project-inner">
+          {p.data.hero && (
+            <a class="hero" href={`${base}posts/${p.slug}/`}>
+              <img src={`${base}${String(p.data.hero).replace(/^\//,'')}`} alt={`${p.data.title} cover`} loading="lazy" decoding="async" />
+            </a>
           )}
-          {p.data.tags && (
-            <div class="project-tags" aria-label="Tags">
-              {(p.data.tags || []).map((t) => (
-                <a class="tag" href={`${base}tags/${t}/`}>{t}</a>
-              ))}
-            </div>
-          )}
+          <div class="project-body">
+            <h2 class="project-title"><a href={`${base}posts/${p.slug}/`}>{p.data.title}</a></h2>
+            {p.data.summary && <p class="project-summary">{p.data.summary}</p>}
+            {(p.data.dateRange || p.data.hours) && (
+              <p class="project-meta">
+                {p.data.dateRange && <span class="meta-chip">{p.data.dateRange}</span>}
+                {p.data.hours && <span class="meta-chip">{p.data.hours}</span>}
+              </p>
+            )}
+            {p.data.tags && (
+              <div class="project-tags" aria-label="Tags">
+                {(p.data.tags || []).map((t) => (
+                  <a class="tag" href={`${base}tags/${t}/`}>{t}</a>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </article>
     ))}
@@ -48,10 +50,11 @@ const projects = (await getCollection('posts', ({ data }) => !data.draft && (dat
   .project-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
   @media (min-width: 48rem) { .project-grid { grid-template-columns: 1fr; } }
 
-  .project-card { border: 1px solid var(--rule); border-radius: 12px; overflow: clip; background: var(--bg); box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 15%, transparent); transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
-  .project-card:hover { transform: translateY(-1px); background: color-mix(in srgb, var(--accent) 8%, var(--bg)); }
-  /* Reduce hero height by ~30%: 16:9 -> 160:63 */
-  .project-card .hero { display: block; background: #fff; aspect-ratio: 3.4/1; overflow: hidden; border-top-left-radius: 12px; border-top-right-radius: 12px; }
+  /* Card framed like article pins */
+  .project-card { border: 1px solid var(--rule); border-radius: 12px; padding: .35rem; background: var(--bg); box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 15%, transparent); transition: transform .18s ease, box-shadow .18s ease, background .18s ease; }
+  .project-inner { background: var(--bg); border-radius: 10px; overflow: hidden; }
+  .project-card:hover { transform: translateY(-1px); }
+  .project-card .hero { display: block; background: var(--bg); aspect-ratio: 3.4/1; overflow: hidden; }
   .project-card .hero img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; }
   .project-body { padding: .75rem .9rem 1rem; }
   .project-title { margin: 0 0 .25rem; font-size: clamp(1.05rem, 3.8vw, 1.35rem); }

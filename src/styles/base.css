@@ -186,8 +186,9 @@ h2 { font-size: clamp(1.25rem, 3.2vw, 1.6rem); }
 .post-head > *:last-child { padding-right: 0; }
 .post-title { font-weight: 700; text-underline-offset: 3px; position: relative; }
 .post-date { color: var(--muted); font-size: .9em; white-space: nowrap; justify-self: end; }
-.post-title::after { content: "→"; display: inline-block; margin-left: .15rem; opacity: 0; transform: translateX(-4px); transition: transform 140ms ease, opacity 140ms ease; }
-.post-card:hover .post-title::after, .post-title:focus-visible::after { opacity: .55; transform: translateX(2px); }
+/* Prevent hover arrow from reserving space and wrapping to a new line on narrow screens */
+.post-title::after { content: ""; display: inline-block; margin-left: 0; opacity: 0; transform: translateX(-4px); transition: transform 140ms ease, opacity 140ms ease; }
+.post-card:hover .post-title::after, .post-title:focus-visible::after { content: "→"; margin-left: .15rem; opacity: .55; transform: translateX(2px); }
 .post-tags { display: flex; gap: .35rem; flex-wrap: wrap; margin-top: .25rem; }
 .tag { position: relative; display: inline-flex; align-items: center; gap: .35rem; padding: 2px 8px; border-radius: 12px; background: color-mix(in srgb, var(--accent) 12%, transparent); text-decoration: none; color: color-mix(in srgb, var(--accent) 60%, var(--fg)); font-size: .8em; overflow: hidden; transition: transform 120ms ease, background 160ms ease; }
 .tag:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); }
