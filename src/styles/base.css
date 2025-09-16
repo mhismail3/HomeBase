@@ -128,11 +128,11 @@ h2 { font-size: clamp(1.25rem, 3.2vw, 1.6rem); }
 .resume-header h1 { color: var(--fg); }
 .contact { color: var(--muted); display: flex; flex-wrap: wrap; gap: .25rem .5rem; margin: 0; }
 .contact.small { font-size: .85em; }
-.contact-icons { display: flex; gap: .5rem; margin: .25rem 0 0; }
-.contact-icons .icon { display: inline-grid; place-items: center; width: 60px; height: 60px; color: var(--muted); border-radius: 8px; text-decoration: none; transition: transform 140ms ease, color 140ms ease, background 140ms ease; position: relative; overflow: hidden; }
-.contact-icons .icon:hover, .contact-icons .icon:focus-visible { color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); transform: translateY(-1px) scale(1.03); outline: none; }
-.contact-icons .icon:active { transform: translateY(0) scale(.97); }
-.contact-icons .icon svg { width: 1.65em; height: 1.65em; }
+.contact-icons { display: flex; gap: 0; margin: .25rem 0 0; }
+.contact-icons .icon { display: inline-flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; margin-right: 1.95rem; transition: transform 200ms cubic-bezier(.2,.8,.2,1), color 140ms ease; will-change: transform; }
+.contact-icons .icon:hover, .contact-icons .icon:focus-visible { color: var(--accent); outline: none; animation: icon-bounce 260ms cubic-bezier(.2,.8,.2,1) forwards; }
+.contact-icons .icon:active { transform: scale(.98); }
+.contact-icons .icon svg { width: 20px; height: 20px; display: block; }
 .contact a { color: inherit; text-decoration: underline; }
 
 .job { margin: 1.25rem 0 1.5rem; }
@@ -227,6 +227,12 @@ article .meta-chip { background: color-mix(in srgb, var(--accent) 10%, transpare
 @keyframes chip-ripple {
   from { opacity: .18; transform: scale(0); }
   to { opacity: 0; transform: scale(14); }
+}
+
+@keyframes icon-bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1.06); }
 }
 
 /* Reduced motion preference */
