@@ -1,6 +1,6 @@
 # AGENTS.md — content/
 
-Purpose: Authoring guidance for Markdown content. Keep content clean and portable. All contributions follow TDD by adding/adjusting tests that validate how content is rendered.
+Purpose: Authoring guidance for Markdown content. Keep content clean, and portable. All contributions follow TDD by adding/adjusting tests that validate how content is rendered.
 
 ## File Structure
 - Note: With Astro Content Collections, files actually live under `src/content/`.
